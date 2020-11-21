@@ -50,20 +50,18 @@ class Game(object):
 
 	def startGame(self):
 		assert(len(self.players)==4)
-		self.restart()
+		assert(len(self.tileDeck)==144 and len(self.discardPile)==0)
 		diceRoll = self.rollDice()
 		print("Dice roll is " + str(diceRoll))
 		self.currentPlayer = diceRoll%4
-		'''ctr = 0
-		while ctr<4:
-			currPlayer = self.players[self.currentPlayer]
-			#get 4 tiles and then next player
+		drawCounter = 0
+		while drawCounter < 4:
 			for j in range(4):
-				currPlayer.addToHand(self.tileDeck.pop())
-				print(currPlayer)
-			self.currentPlayer = (self.currentPlayer+1)%4
-			ctr +=1
-		'''
+				currPlayer = self.players[self.currentPlayer]
+				for i in range(4):
+					currPlayer.addToHand(self.tileDeck.pop())
+				self.currentPlayer = (self.currentPlayer + 1) % 4
+			drawCounter += 1
 
 
 
@@ -75,9 +73,12 @@ test.addPlayer("Helmond")
 test.addPlayer("MereHuang")
 test.addPlayer("Tim")
 test.addPlayer("Eileen")
-test.startGame()
+test.restart()
 for tile in test.tileDeck:
 	print(tile)
+test.startGame()
+for yolo  in range(4):
+	print(test.players[yolo])
 #for i in range(4):
 #	print(test.players[i])
 
